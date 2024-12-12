@@ -505,7 +505,7 @@ export type SettingsQueryResult = {
   };
 } | null;
 // Variable: getTeamQuery
-// Query: *[_type == 'team' && slug.current == $slug][0]{    ...  }
+// Query: *[_type == 'team' && slug.current == $slug][0]{    ...,    "goals": goals[]->{      ...,      "dependentOn": dependentOn[]->{        ...      }    }  }
 export type GetTeamQueryResult = null;
 // Variable: allPostsQuery
 // Query: *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
@@ -602,7 +602,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"settings\"][0]": SettingsQueryResult;
-    "\n  *[_type == 'team' && slug.current == $slug][0]{\n    ...\n  }\n": GetTeamQueryResult;
+    "\n  *[_type == 'team' && slug.current == $slug][0]{\n    ...,\n    \"goals\": goals[]->{\n      ...,\n      \"dependentOn\": dependentOn[]->{\n        ...\n      }\n    }\n  }\n": GetTeamQueryResult;
     "\n  *[_type == \"post\" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": AllPostsQueryResult;
     "\n  *[_type == \"post\" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  \"status\": select(_originalId in path(\"drafts.**\") => \"draft\", \"published\"),\n  \"title\": coalesce(title, \"Untitled\"),\n  \"slug\": slug.current,\n  excerpt,\n  coverImage,\n  \"date\": coalesce(date, _updatedAt),\n  \"author\": author->{firstName, lastName, picture},\n\n  }\n": MorePostsQueryResult;
     "\n  *[_type == \"team\" && slug.current == $slug] [0] {\n    ...\n  }\n": TeamQueryResult;
