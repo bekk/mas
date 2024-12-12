@@ -22,7 +22,7 @@ export default defineType({
       name: 'dependentOn',
       title: 'Dependent On',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'team'}] }]
+      of: [{ type: 'reference', to: [{ type: 'team' }] }]
     }),
     defineField({
       name: 'keyResults',
@@ -32,6 +32,11 @@ export default defineType({
         type: 'object', fields: [defineField({
           name: "description",
           type: "text",
+        }),
+        defineField({
+          name: "progress",
+          type: "number",
+          validation: (Rule) => Rule.required().min(0).max(100),
         })]
       }],
     })
