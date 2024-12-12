@@ -21,8 +21,8 @@ export default defineType({
     defineField({
       name: 'goals',
       title: 'Mål',
-      type: 'reference',
-      to: [{type: 'goal'}],
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'goal'}]}],
     })
   ],
 })
