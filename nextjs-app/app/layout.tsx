@@ -64,7 +64,6 @@ export default async function RootLayout({
 }) {
   const { isEnabled: isDraftMode } = await draftMode();
   console.log(isDraftMode);
-  
 
   return (
     <html lang="en" className={`${inter.variable} bg-white text-black`}>
@@ -81,9 +80,13 @@ export default async function RootLayout({
           )}
           {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
           <SanityLive onError={handleError} />
-          <Header />
-          <main className="">{children}</main>
-          <Footer />
+          <div className="flex flex-col h-screen w-screen">
+            <Header />
+            <div className="flex flex-grow flex-row max-w-full max-h-full">
+              <main className="">{children}</main>
+            </div>
+            <Footer />
+          </div>
         </section>
         <SpeedInsights />
       </body>
