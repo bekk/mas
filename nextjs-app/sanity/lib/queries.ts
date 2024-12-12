@@ -28,9 +28,9 @@ export const getTeamQuery = defineQuery(`
     ...,
     "goals": goals[]->{
       ...,
-      "dependentOn": dependentOn[]->{
+      "dependentOn": coalesce(dependentOn[]->{
         ...
-      }
+      }, []),
     }
   }
 `);
