@@ -23,21 +23,15 @@ const linkFields = /* groq */ `
       }
 `;
 
-export const getPageQuery = defineQuery(`
-  *[_type == 'page' && slug.current == $slug][0]{
-    _id,
-    _type,
-    name,
-    slug,
-    heading,
-    subheading,
-    "pageBuilder": pageBuilder[]{
+export const getTeamQuery = defineQuery(`
+  *[_type == 'team' && slug.current == $slug][0]{
+    ...,
+    "goals": goals[]->{
       ...,
-      _type == "callToAction" => {
-        ...,
-        ${linkFields},
+      "dependentOn": dependentOn[]->{
+        ...
       }
-    },
+    }
   }
 `);
 
@@ -53,16 +47,9 @@ export const morePostsQuery = defineQuery(`
   }
 `);
 
-export const postQuery = defineQuery(`
-  *[_type == "post" && slug.current == $slug] [0] {
-    content[]{
-    ...,
-    markDefs[]{
-      ...,
-      ${linkFields}
-    }
-  },
-    ${postFields}
+export const teamQuery = defineQuery(`
+  *[_type == "team" && slug.current == $slug] [0] {
+    ...
   }
 `);
 
