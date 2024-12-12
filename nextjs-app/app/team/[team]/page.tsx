@@ -18,7 +18,7 @@ export default async function Page(props: Props) {
   return (
     <div className="max-w-[1440px] mx-auto px-12">
       <h2 className="text-[32px]">{team.name}</h2>
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-3 gap-8 mt-4">
         {team.goals.map((goal, index) => {
           console.log(goal);
           
